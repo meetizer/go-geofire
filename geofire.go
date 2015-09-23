@@ -18,6 +18,7 @@ type geoFireObject struct {
 	Name      string          `json:"name"`
 	TimeStamp int64           `json:"timestamp"`
 }
+
 type locationGeoFire struct {
 	Latitude  float64 `json:"0"`
 	Longitude float64 `json:"1"`
@@ -30,7 +31,7 @@ type Location struct {
 	Lng float64 `json:"longitude"`
 }
 
-//Place ..
+//Place represents a place with a defined name and the location of the place
 type Place struct {
 	Name     string    `json:"name"`
 	Location *Location `json:"location"`
