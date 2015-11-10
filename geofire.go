@@ -37,6 +37,19 @@ type Place struct {
 	Location *Location `json:"location"`
 }
 
+//GeoFire ..
+type GeoFire struct {
+	firebaseRef *firego.Firebase
+}
+
+func (geoFire GeoFire) queryAtLocation(center locationGeoFire, radius float64) GeoQuery {
+	var newGeoQuery GeoQuery
+	newGeoQuery.Center = center
+	newGeoQuery.Radius = radius
+	newGeoQuery.Geofire = geoFire
+	return newGeoQuery
+}
+
 /**
  * Generates a geohash of the specified precision/string length from the  [latitude, longitude]
  * pair, specified as an array.
