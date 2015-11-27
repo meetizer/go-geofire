@@ -60,6 +60,26 @@ func (geoFire GeoFire) queryAtLocation(center locationGeoFire, radius float64) G
  * @return {string} The geohash of the inputted location.
  */
 
+//SetSampleLocation ..
+func SetSampleLocation(place *Place, key string, ref *firego.Firebase) error {
+	hash, err := encodeGeoHash(place.Location)
+	if err != nil {
+		return err
+	}
+	var auxlocation locationGeoFire
+	var newGeofireObject geoFireObject
+	auxlocation.Latitude = place.Location.Lat
+	auxlocation.Longitude = place.Location.Lng
+	newGeofireObject.Hash = hash
+	newGeofireObject.Location = auxlocation
+	newGeofireObject.Name = place.Name
+	newGeofireObject.TimeStamp = time.Now().Unix()
+	placeRef := ref.Child("placesSample").Child(key)
+	placeRef.Update(newGeofireObject)
+
+	return nil
+}
+
 //SetLocation ..
 func SetLocation(place *Place, key string, ref *firego.Firebase) error {
 	hash, err := encodeGeoHash(place.Location)
